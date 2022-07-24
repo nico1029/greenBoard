@@ -8,8 +8,8 @@ import {
 } from '@angular/platform-browser-dynamic/testing';
 
 declare const require: {
-  context(path: string, deep?: boolean, filter?: RegExp): {
-    <T>(id: string): T;
+  context(path: string, deep?: boolean, filter?: RegExp): { // eslint-disable-line
+    <T>(id: string): T; // eslint-disable-line
     keys(): string[];
   };
 };
@@ -21,6 +21,6 @@ getTestBed().initTestEnvironment(
 );
 
 // Then we find all the tests.
-const context = require.context('./', true, /\.spec\.ts$/);
+const context = require.context('./', true, /\.spec\.ts$/); // eslint-disable-line
 // And load the modules.
 context.keys().forEach(context);
