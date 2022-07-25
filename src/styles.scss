@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+/* Font Families */
+@import "src/app/styles/bootstrap-config/font-families.scss";
+
+/* Bootstrap customization */
+@import "src/app/styles/bootstrap-config/colors.scss";
+@import "src/app/styles/bootstrap-config/fonts.scss";
+
+/* Import Bootstrap after bootstrap customization */
+@import "bootstrap";
+
+/* Mapbox styles */
+@import 'mapbox-gl/dist/mapbox-gl.css';

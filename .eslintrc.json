@@ -44,7 +44,7 @@
         "init-declarations": ["error", "never"],
         "key-spacing": ["error", { "beforeColon": false }],
         "lines-around-comment": ["error", { "beforeBlockComment": true }],
-        "max-len": ["error", { "comments": 65, "ignoreComments": true }],
+        "max-len": ["error", { "comments": 80, "ignoreComments": true }, { "code": 150}],
         "no-alert": "error",
         "no-console": "error",
         "no-dupe-else-if": "error",
