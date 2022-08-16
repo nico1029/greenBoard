@@ -6,6 +6,15 @@ export const environment: any = {
   production: false,
   mapboxKey:
     'pk.eyJ1Ijoibmljb2xhc3JsIiwiYSI6ImNsNjAzZTN4aTAxZnEzanBtYzFkNHJzbTQifQ.xDke70gnKbgU0Nx6B1cHYw',
+  firebaseConfig: {
+    apiKey: 'AIzaSyAR7QsSMp9JC3HTR6tYlYqrIuIcVd_RmBY',
+    authDomain: 'greenboard-8530d.firebaseapp.com',
+    projectId: 'greenboard-8530d',
+    storageBucket: 'greenboard-8530d.appspot.com',
+    messagingSenderId: '692012939802',
+    appId: '1:692012939802:web:b3bd1b012281cbdaa42fa3',
+    measurementId: 'G-C3PR80Q4H9',
+  },
 };
 
 /*

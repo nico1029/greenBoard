@@ -1,0 +1,52 @@
+<div class="container-fluid login-bg vh-100 d-flex justify-content-center align-items-center position-relative">
+    <div class="position-absolute top-0 start-0 text-white fs-26 mt-2 ms-3">
+        Greenboard <i class="fa-solid fa-road"></i>
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="container p-5 login-form shadow-lg position-relative">
+            <div class="d-flex flex-column align-items-center" id="loginForm">
+                <span class="fs-35 text-white fw-bold">Iniciar sesión</span>
+                <span class="fs-14 text-light mb-3">Por tu protección, por favor verifica tu identidad</span>
+                <div class="mb-3 w-100">
+                    <label for="formGroupLoginForm" class="form-label text-light fs-14">Email <span
+                            class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-transparent" id="email-addon"><i
+                                class="fa-solid fa-user text-white"></i></span>
+                        <input type="email" class="form-control" formControlName="email" aria-label="email"
+                            aria-describedby="email-addon" email>
+                    </div>
+                    <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="text-danger fs-14">
+                        <div *ngIf="email?.errors?.['required']">
+                            El email es requerido.
+                        </div>
+                        <div *ngIf="email?.errors?.['email']">
+                            El email debe ser válido (e.g. correo@dominio.com).
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-5 w-100">
+                    <label for="formGroupLoginForm" class="form-label text-light fs-14">Contraseña <span
+                            class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-transparent" id="password-addon"><i
+                                class="fa-solid fa-lock text-white"></i></span>
+                        <input type="password" class="form-control" formControlName="password" aria-label="password"
+                            aria-describedby="password-addon">
+                    </div>
+                    <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="text-danger fs-14">
+                        <div *ngIf="password?.errors?.['required']">
+                            La contraseña es requerida.
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success btn-lg rounded-2 w-100 text-white"
+                    [ngClass]="{'btn-outline-light': !loginForm.valid}" [disabled]="!loginForm.valid">Iniciar
+                    sesión</button>
+            </div>
+        </div>
+    </form>
+    <div class="position-absolute bottom-0 end-0 mb-1 me-2">
+        <span class="fs-12 text-light">Copyright © Todos los derechos reservados</span>
+    </div>
+</div>

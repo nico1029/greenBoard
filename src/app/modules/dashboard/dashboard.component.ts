@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,4 +11,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardComponent {}
+export class DashboardComponent implements OnChanges {
+  public ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes, 'Dashboard Component'); // eslint-disable-line
+  }
+}

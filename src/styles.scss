@@ -6,6 +6,9 @@
 @import "src/app/styles/bootstrap-config/colors.scss";
 @import "src/app/styles/bootstrap-config/fonts.scss";
 
+/* Custom styles */
+@import "src/app/styles/custom/components.scss";
+
 /* Import Bootstrap after bootstrap customization */
 @import "bootstrap";
 

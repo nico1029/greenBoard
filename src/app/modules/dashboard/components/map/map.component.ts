@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import * as Mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
 
@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnChanges {
   public map!: Mapboxgl.Map;
 
   public ngOnInit(): void {
@@ -18,5 +18,9 @@ export class MapComponent implements OnInit {
       center: [-74.5, 40],
       zoom: 9,
     });
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes, 'Map Component'); // eslint-disable-line
   }
 }
