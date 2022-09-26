@@ -15,6 +15,8 @@ export const environment: any = {
     appId: '1:692012939802:web:b3bd1b012281cbdaa42fa3',
     measurementId: 'G-C3PR80Q4H9',
   },
+  backendUrl: '',
+  issUrl: 'https://api.wheretheiss.at/v1/satellites/25544',
 };
 
 /*

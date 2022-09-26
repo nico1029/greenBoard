@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
+import { User } from '../models/user';
 import { ErrorDialogService } from './error-dialog.service';
 
 @Injectable({
@@ -55,5 +56,10 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+
+  public get user(): User {
+    const user: User = JSON.parse(localStorage.getItem('user')!);
+    return user;
   }
 }

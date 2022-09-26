@@ -1,0 +1,9 @@
+{
+    "/greenboard-8530d.appspot.com/o/*": {
+        "target": "https://firebasestorage.googleapis.com/v0/b",
+        "secure": true,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+}
+

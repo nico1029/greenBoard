@@ -25,3 +25,15 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## JSON structure of response sended from back (gettingLocation - Map Service)
+
+{
+    devices: [
+        {
+            type: 'byke',
+            latLong: [-74.063644, 4.624335],
+            icon: 'byke',
+        }
+    ]
+}

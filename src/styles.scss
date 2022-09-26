@@ -9,8 +9,11 @@
 /* Custom styles */
 @import "src/app/styles/custom/components.scss";
 
+/* Map Styles */
+@import "src/app/styles/custom/map.scss";
+
 /* Import Bootstrap after bootstrap customization */
 @import "bootstrap";
 
 /* Mapbox styles */
-@import 'mapbox-gl/dist/mapbox-gl.css';
+@import "mapbox-gl/dist/mapbox-gl.css";
