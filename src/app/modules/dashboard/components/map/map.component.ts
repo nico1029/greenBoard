@@ -5,10 +5,14 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { Store } from '@ngrx/store';
 import * as Mapboxgl from 'mapbox-gl';
-import { interval, mergeMap, Subject, take, takeUntil } from 'rxjs';
+import { interval, mergeMap, noop, Subject, take, takeUntil, tap } from 'rxjs';
+import { updateDevices } from 'src/app/core/store/actions/devices.actions';
+import { Devices } from 'src/app/shared/models/devices.interface';
 import { environment } from 'src/environments/environment';
 import { MapImagesSrc } from '../../models/map.enum';
+import { MarkerFeatures } from '../../models/map.interface';
 import { MapService } from '../../services/map.service';
 
 @Component({
@@ -20,7 +24,10 @@ export class MapComponent implements OnInit, OnChanges, OnDestroy {
   public map!: Mapboxgl.Map;
   public notifier: Subject<null> = new Subject();
 
-  constructor(private readonly mapService: MapService) {
+  constructor(
+    private readonly mapService: MapService,
+    private readonly store: Store
+  ) {
     // TODO
   }
 
@@ -43,8 +50,8 @@ export class MapComponent implements OnInit, OnChanges, OnDestroy {
       accessToken: environment.mapboxKey,
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [-74.063644, 4.624335], // Long, Lat
-      zoom: 1,
+      center: [-74.103644, 4.674335], // Long, Lat
+      zoom: 10,
     });
     this.renderMap();
     this.loadUtilities();
@@ -74,16 +81,19 @@ export class MapComponent implements OnInit, OnChanges, OnDestroy {
 
   private addSource(): void {
     this.mapService
-      .getLocation()
-      .pipe(take(1))
-      .subscribe((location: any) => {
-        this.map.addSource('devices', {
-          type: 'geojson',
-          data: this.buildMarkers(location),
-        });
-        this.addLayer();
-        this.createPopUp();
-      });
+      .getLocation(this.mapService.numDevices)
+      .pipe(
+        take(1),
+        tap((devices: Devices[]) => {
+          this.map.addSource('devices', {
+            type: 'geojson',
+            data: this.buildMarkers(devices),
+          });
+          this.addLayer();
+          this.createPopUp();
+        })
+      )
+      .subscribe(noop, noop);
   }
 
   private addLayer(): void {
@@ -99,37 +109,43 @@ export class MapComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  private buildMarkers(location: any): any {
+  private buildMarkers(devices: Devices[]): any {
+    this.store.dispatch(updateDevices({ devices }));
+    let markerFeatures: MarkerFeatures[];
+    markerFeatures = [];
+    devices.forEach((device: Devices) => {
+      const feature: MarkerFeatures = {
+        type: device.type,
+        properties: {
+          description: `The device id is ${device.deviceId}`,
+          icon: device.type,
+        },
+        geometry: {
+          type: 'Point',
+          coordinates: [device.latLong[1], device.latLong[0]],
+        },
+      };
+      markerFeatures.push(feature);
+    });
     return {
       type: 'FeatureCollection',
-      features: [
-        {
-          type: 'Feature',
-          properties: {
-            description: 'Hola',
-            icon: 'byke',
-          },
-          geometry: {
-            type: 'Point',
-            coordinates: [location.longitude, location.latitude],
-          },
-        },
-      ],
+      features: markerFeatures,
     };
   }
 
   private updateSource(): void {
-    interval(2000)
+    interval(5000)
       .pipe(
         takeUntil(this.notifier),
-        mergeMap(() => this.mapService.getLocation())
+        mergeMap(() => this.mapService.getLocation(this.mapService.numDevices)),
+        tap((devices: Devices[]) => {
+          const source: Mapboxgl.GeoJSONSource = this.map.getSource(
+            'devices'
+          ) as Mapboxgl.GeoJSONSource;
+          source.setData(this.buildMarkers(devices));
+        })
       )
-      .subscribe((x: any) => {
-        const source: Mapboxgl.GeoJSONSource = this.map.getSource(
-          'devices'
-        ) as Mapboxgl.GeoJSONSource;
-        source.setData(this.buildMarkers(x));
-      });
+      .subscribe(noop, noop);
   }
 
   private createPopUp(): void {

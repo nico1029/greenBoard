@@ -15,6 +15,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpErrorInterceptor } from './core/interceptors/http-error.interceptor';
 import { ErrorDialogService } from './core/services/error-dialog.service';
 import { ErrorDialogComponent } from './shared/components/error-dialog/error-dialog.component';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [AppComponent, ErrorDialogComponent],
@@ -27,6 +29,8 @@ import { ErrorDialogComponent } from './shared/components/error-dialog/error-dia
     AngularFirestoreModule,
     AngularFireStorageModule,
     HttpClientModule,
+    StoreModule.forRoot({}, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [
     AuthService,

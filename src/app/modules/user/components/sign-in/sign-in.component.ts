@@ -28,7 +28,7 @@ export class SignInComponent implements OnChanges {
     private readonly nonFb: NonNullableFormBuilder,
     private readonly authService: AuthService
   ) {
-    // eslint-disable-line
+    // TODO
   }
 
   public ngOnChanges(changes: SimpleChanges): void {

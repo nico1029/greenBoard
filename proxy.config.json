@@ -4,6 +4,12 @@
         "secure": true,
         "logLevel": "debug",
         "changeOrigin": true
+    },
+    "/get-devices*": {
+        "target": "http://localhost:8080/api/v1",
+        "secure": true,
+        "logLevel": "debug",
+        "changeOrigin": true
     }
 }
 

@@ -1,4 +1,4 @@
 // Firebase reference url is https://firebasestorage.googleapis.com/v0/b/greenboard-8530d.appspot.com/o/
 export enum MapImagesSrc {
-  Byke = 'bicycle.png?alt=media&token=3e500b33-bfe8-4f23-bc63-934a21d3da77',
+  Byke = 'bicycle.png?alt=media&token=24fc781c-3f2d-4ef7-9576-be4581d32af4',
 }

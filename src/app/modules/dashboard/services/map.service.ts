@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, retry } from 'rxjs';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
-import { environment } from 'src/environments/environment';
+import { Devices } from 'src/app/shared/models/devices.interface';
+// import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -16,11 +17,22 @@ export class MapService {
   }
   // Proxy url
   public baseUrlForImages: string = '/greenboard-8530d.appspot.com/o/'; // eslint-disable-line
+  private baseUrlForDevices: string = '/get-devices'; //eslint-disable-line
+  public numDevices: number = 10; // eslint-disable-line
 
   // TODO: Modify the type of return to LocationResponse
-  public getLocation(): Observable<any> {
+  // public getLocation(): Observable<any> {
+  //   return this.http
+  //     .get<any>(environment.issUrl)
+  //     .pipe(catchError(this.errorHandler.handleError), retry(3));
+  // }
+
+  public getLocation(numDevices: number): Observable<Devices[]> {
+    const params: HttpParams = new HttpParams({
+      fromString: `numDevices=${numDevices}`,
+    });
     return this.http
-      .get<any>(environment.issUrl)
+      .get<Devices[]>(this.baseUrlForDevices, { params })
       .pipe(catchError(this.errorHandler.handleError), retry(3));
   }
 
