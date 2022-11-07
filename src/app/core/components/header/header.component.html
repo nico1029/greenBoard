@@ -1,8 +1,8 @@
 <nav class="navbar bg-white shadow sticky-top p-3 border border-bottom">
     <div class="d-flex ms-auto align-items-center">
         <button class="btn btn-light rounded-circle" role="button">
-            <i class="fa-solid fa-user text-white"></i>
+            <em class="fa-solid fa-user text-white"></em>
         </button>
-        <span class="ms-2"> {{ user.email }} </span>
+        <span class="ms-2" *ngIf="user$ | async; let user"> {{ user.email }} </span>
     </div>
 </nav>

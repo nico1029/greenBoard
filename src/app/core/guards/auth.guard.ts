@@ -6,17 +6,15 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
-import { AuthService } from '../services/auth.service';
+import { Store } from '@ngrx/store';
+import { Observable, tap } from 'rxjs';
+import { selectIsLoggedIn } from '../store/selectors/auth.selectors';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(
-    private readonly authService: AuthService,
-    private readonly router: Router
-  ) {
+  constructor(private readonly router: Router, private readonly store: Store) {
     // TODO
   }
   public canActivate(
@@ -27,10 +25,12 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const isAuthenticated: boolean = this.authService.isLoggedIn;
-    if (!isAuthenticated) {
-      this.router.navigate(['sign-in']);
-    }
-    return isAuthenticated;
+    return this.store.select(selectIsLoggedIn).pipe(
+      tap((loggedIn: boolean) => {
+        if (!loggedIn) {
+          this.router.navigate(['']);
+        }
+      })
+    );
   }
 }

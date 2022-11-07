@@ -20,13 +20,6 @@ export class MapService {
   private baseUrlForDevices: string = '/get-devices'; //eslint-disable-line
   public numDevices: number = 10; // eslint-disable-line
 
-  // TODO: Modify the type of return to LocationResponse
-  // public getLocation(): Observable<any> {
-  //   return this.http
-  //     .get<any>(environment.issUrl)
-  //     .pipe(catchError(this.errorHandler.handleError), retry(3));
-  // }
-
   public getLocation(numDevices: number): Observable<Devices[]> {
     const params: HttpParams = new HttpParams({
       fromString: `numDevices=${numDevices}`,

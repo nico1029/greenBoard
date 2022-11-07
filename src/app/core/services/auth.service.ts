@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Router } from '@angular/router';
-import { User } from '../models/user';
+import { Store } from '@ngrx/store';
+import { login } from '../store/actions/auth.actions';
 import { ErrorDialogService } from './error-dialog.service';
 
 @Injectable({
@@ -12,8 +12,8 @@ export class AuthService {
 
   constructor(
     private readonly afAuth: AngularFireAuth, // Inject Firebase auth service
-    private readonly router: Router,
-    private readonly errorDialogService: ErrorDialogService
+    private readonly errorDialogService: ErrorDialogService,
+    private readonly store: Store
   ) {
     // Saving user data in localstorage when logged in and setting up null when logged out
     this.afAuth.authState.subscribe((user: any) => {
@@ -34,32 +34,14 @@ export class AuthService {
       .then(() => {
         this.afAuth.authState.subscribe((user: any) => {
           if (user) {
-            this.router.navigate(['dashboard']);
+            this.store.dispatch(
+              login({ user: JSON.parse(JSON.stringify(user)) })
+            );
           }
         });
       })
       .catch(() => {
         this.errorDialogService.openDialog('user-not-found');
       });
-  }
-
-  public SignOut(): void {
-    this.afAuth.signOut().then(() => {
-      localStorage.removeItem('user');
-      this.router.navigate(['sign-in']);
-    });
-  }
-
-  public get isLoggedIn(): boolean {
-    const user: any = JSON.parse(localStorage.getItem('user')!);
-    if (user !== null) {
-      return true;
-    }
-    return false;
-  }
-
-  public get user(): User {
-    const user: User = JSON.parse(localStorage.getItem('user')!);
-    return user;
   }
 }

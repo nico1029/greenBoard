@@ -17,6 +17,10 @@ import { ErrorDialogService } from './core/services/error-dialog.service';
 import { ErrorDialogComponent } from './shared/components/error-dialog/error-dialog.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { metaReducers, reducers } from './core/store/reducers/app.reducers';
+import { AuthEffects } from './core/store/effects/auth.effects';
 
 @NgModule({
   declarations: [AppComponent, ErrorDialogComponent],
@@ -29,8 +33,24 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     AngularFirestoreModule,
     AngularFireStorageModule,
     HttpClientModule,
-    StoreModule.forRoot({}, {}),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+        strictActionSerializability: true,
+        strictActionWithinNgZone: true,
+      },
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
+    EffectsModule.forRoot([AuthEffects]),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router',
+      routerState: RouterState.Minimal,
+    }),
   ],
   providers: [
     AuthService,

@@ -1984,6 +1984,13 @@
   dependencies:
     tslib "^2.3.0"
 
+"@ngrx/effects@14.3.2":
+  version "14.3.2"
+  resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-14.3.2.tgz#a5cc62e78cec2f5ccce810b8d27a58cc91e72c4f"
+  integrity sha512-6bpGfA44jzwhBcmNaTwVgnFmYOX9iKPFpXyetDe41tVESo1CsNhUBPTmISDXKN9Mx2mwGbsMxrn6QFRypSsKAQ==
+  dependencies:
+    tslib "^2.0.0"
+
 "@ngrx/eslint-plugin@^14.3.2":
   version "14.3.2"
   resolved "https://registry.yarnpkg.com/@ngrx/eslint-plugin/-/eslint-plugin-14.3.2.tgz#6d61001566ad6b85637f6bc272d64cf44a447784"
@@ -1994,6 +2001,13 @@
     eslint-etc "^5.1.0"
     semver "^7.3.5"
     strip-json-comments "3.1.1"
+
+"@ngrx/router-store@14.3.2":
+  version "14.3.2"
+  resolved "https://registry.yarnpkg.com/@ngrx/router-store/-/router-store-14.3.2.tgz#3f684b38d550b711094ab1fcc7edf2d1b536c039"
+  integrity sha512-3FU/fADoMCLjv9vFXp1Xq+W1JGVQbfPDp8gzzsuBoQSXlh3MnUbXJdeODzt0h6GDk4FtpeJnsR1R9x+Fh2cFZg==
+  dependencies:
+    tslib "^2.0.0"
 
 "@ngrx/schematics@14.3.2":
   version "14.3.2"

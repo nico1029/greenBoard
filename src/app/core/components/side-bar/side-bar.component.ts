@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../services/auth.service';
+import { Store } from '@ngrx/store';
+import { logout } from '../../store/actions/auth.actions';
 
 @Component({
   selector: 'app-side-bar',
@@ -11,11 +12,11 @@ import { AuthService } from '../../services/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SideBarComponent {
-  constructor(private readonly authService: AuthService) {
+  constructor(private readonly store: Store) {
     // TODO
   }
 
   public signOut(): void {
-    this.authService.SignOut();
+    this.store.dispatch(logout());
   }
 }
