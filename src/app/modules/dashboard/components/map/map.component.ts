@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   OnChanges,
   OnDestroy,
@@ -7,7 +8,16 @@ import {
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as Mapboxgl from 'mapbox-gl';
-import { interval, mergeMap, noop, Subject, take, takeUntil, tap } from 'rxjs';
+import {
+  interval,
+  mergeMap,
+  noop,
+  retry,
+  Subject,
+  take,
+  takeUntil,
+  tap,
+} from 'rxjs';
 import { updateDevices } from 'src/app/core/store/actions/devices.actions';
 import { Devices } from 'src/app/shared/models/devices.interface';
 import { environment } from 'src/environments/environment';
@@ -19,6 +29,7 @@ import { MapService } from '../../services/map.service';
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MapComponent implements OnInit, OnChanges, OnDestroy {
   public map!: Mapboxgl.Map;
@@ -49,7 +60,7 @@ export class MapComponent implements OnInit, OnChanges, OnDestroy {
     this.map = new Mapboxgl.Map({
       accessToken: environment.mapboxKey,
       container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v11',
+      style: 'mapbox://styles/nicolasrl/cktjitgak09ua17o1vuxdiwye',
       center: [-74.103644, 4.674335], // Long, Lat
       zoom: 10,
     });
@@ -59,10 +70,10 @@ export class MapComponent implements OnInit, OnChanges, OnDestroy {
 
   private renderMap(): void {
     this.map.loadImage(
-      this.mapService.baseUrlForImages + this.chooseImageSrc('byke'),
+      this.mapService.baseUrlForImages + this.chooseImageSrc('scooter'),
       (error: Error | undefined, image: any) => {
         if (error) throw error;
-        this.map.addImage('byke', image);
+        this.map.addImage('scooter', image);
         this.addSource();
         this.updateSource();
       }
@@ -72,8 +83,8 @@ export class MapComponent implements OnInit, OnChanges, OnDestroy {
   private chooseImageSrc(markerType: string): string {
     let imageSrc: string = ''; // eslint-disable-line
     switch (markerType) {
-      case 'byke':
-        imageSrc = MapImagesSrc.Byke;
+      case 'scooter':
+        imageSrc = MapImagesSrc.Scooter;
         break;
     }
     return imageSrc;
@@ -117,7 +128,7 @@ export class MapComponent implements OnInit, OnChanges, OnDestroy {
       const feature: MarkerFeatures = {
         type: device.type,
         properties: {
-          description: `The device id is ${device.deviceId}`,
+          description: `The device id is ${device.id}`,
           icon: device.type,
         },
         geometry: {
@@ -136,6 +147,7 @@ export class MapComponent implements OnInit, OnChanges, OnDestroy {
   private updateSource(): void {
     interval(5000)
       .pipe(
+        retry(3),
         takeUntil(this.notifier),
         mergeMap(() => this.mapService.getLocation(this.mapService.numDevices)),
         tap((devices: Devices[]) => {
