@@ -1991,6 +1991,13 @@
   dependencies:
     tslib "^2.0.0"
 
+"@ngrx/entity@14.3.2":
+  version "14.3.2"
+  resolved "https://registry.yarnpkg.com/@ngrx/entity/-/entity-14.3.2.tgz#160dbc6d4d8329e05135a7b352156ff5ee6d8103"
+  integrity sha512-Uyb36oVEiTbBJcb6TJ3OTseJdeamNKSxkvqw/uLHt+My87QaRaTEQceDWCsVCBEO4Q4Vgf2g0vbdPZdtGUZcbg==
+  dependencies:
+    tslib "^2.0.0"
+
 "@ngrx/eslint-plugin@^14.3.2":
   version "14.3.2"
   resolved "https://registry.yarnpkg.com/@ngrx/eslint-plugin/-/eslint-plugin-14.3.2.tgz#6d61001566ad6b85637f6bc272d64cf44a447784"

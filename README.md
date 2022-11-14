@@ -31,9 +31,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 {
     devices: [
         {
-            type: 'byke',
+            type: 'scooter',
             latLong: [-74.063644, 4.624335],
-            icon: 'byke',
+            icon: 'scooter',
         }
     ]
 }
