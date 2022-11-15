@@ -23,6 +23,11 @@ export const selectAllDevices: MemoizedSelector<any, any> = createSelector(
   fromDevices.selectAllDevices
 );
 
+export const selectDevicesEntities: MemoizedSelector<any, any> = createSelector(
+  selectDevicesState,
+  fromDevices.selectDevicesEntities
+);
+
 export const selectTotalDevices: MemoizedSelector<any, any> = createSelector(
   selectDevicesState,
   fromDevices.selectDevicesTotal

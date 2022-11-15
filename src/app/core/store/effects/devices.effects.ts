@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
 import { concatMap, map } from 'rxjs';
 import { Devices } from 'src/app/shared/models/devices.interface';
 import { DevicesActions } from '../action-types';
-import { reportedDevices } from '../actions/records.actions';
+import { reportRecords } from '../actions/records.actions';
 import { selectAllDevices } from '../selectors/devices.selectors';
 
 @Injectable()
@@ -26,13 +26,26 @@ export class DevicesEffects {
       ofType(DevicesActions.updateDevices),
       concatMap((action: any) => this.store.select(selectAllDevices)), // eslint-disable-line
       map((devices: Devices[]) => {
-        localStorage.setItem('devices', JSON.stringify(devices));
-        const records: Devices[] = devices.filter(
+        let records: Devices[];
+        records = devices.filter(
           (device: Devices) =>
             device.status === 'Lost Connection' ||
             device.isRunOutOfBattery === 'Yes'
         );
-        return reportedDevices({ records }); // eslint-disable-line
+        if (records.length >= 1) {
+          const oldDevices: Devices[] = JSON.parse(
+            localStorage.getItem('devices')!
+          );
+          // TODO Code case when it does not find any device in local Storage. In this case is returning undefined
+          records = records.map((device: Devices) => {
+            const oldLatLong: [number, number] = oldDevices.find(
+              (x: Devices) => x.id === device.id
+            )?.latLong!;
+            return { ...device, lastLatLong: oldLatLong };
+          });
+        }
+        localStorage.setItem('devices', JSON.stringify(devices));
+        return reportRecords({ records }); // eslint-disable-line
       })
     );
   });

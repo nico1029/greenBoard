@@ -7,7 +7,7 @@ import {
 } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { concatMap, tap } from 'rxjs';
-import { Devices } from 'src/app/shared/models/devices.interface';
+import { Records } from 'src/app/modules/dashboard/models/activity-log.interface';
 import { RecordsActions } from '../action-types';
 import { selectAllRecords } from '../selectors/records.selectors';
 
@@ -23,9 +23,9 @@ export class RecordsEffects {
   public records$: CreateEffectMetadata = createEffect(
     () => {
       return this.actions$.pipe(
-        ofType(RecordsActions.reportedDevices),
+        ofType(RecordsActions.reportRecords),
         concatMap((action: any) => this.store.select(selectAllRecords)), // eslint-disable-line
-        tap((records: Devices[]) =>
+        tap((records: Records[]) =>
           localStorage.setItem('records', JSON.stringify(records))
         )
       );

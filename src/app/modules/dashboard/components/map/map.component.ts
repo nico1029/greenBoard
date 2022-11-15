@@ -29,7 +29,7 @@ import { MapService } from '../../services/map.service';
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapComponent implements OnInit, OnChanges, OnDestroy {
   public map!: Mapboxgl.Map;

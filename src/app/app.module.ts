@@ -19,7 +19,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
-import { metaReducers } from './core/store/reducers/app.reducers';
+// import { metaReducers } from './core/store/reducers/app.reducers';
 import { AuthEffects } from './core/store/effects/auth.effects';
 import { appReducers } from './core/store/reducers-map';
 
@@ -35,7 +35,7 @@ import { appReducers } from './core/store/reducers-map';
     AngularFireStorageModule,
     HttpClientModule,
     StoreModule.forRoot(appReducers, {
-      metaReducers,
+      // metaReducers,
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true,

@@ -46,7 +46,7 @@ export const devicesReducer: ActionReducer<DevicesState> = createReducer(
           device.latLong.findIndex((num: any) => num == null) < 0
             ? 'Active'
             : 'Lost Connection',
-        isRunOutOfBattery: device.batteryLevel < 30 ? 'True' : 'False',
+        isRunOutOfBattery: device.batteryLevel < 30 ? 'Yes' : 'No',
       };
     });
     return adapter.setAll(updatedDevices, state);

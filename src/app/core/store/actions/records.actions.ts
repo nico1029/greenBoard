@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
-import { Devices } from 'src/app/shared/models/devices.interface';
+import { Records } from 'src/app/modules/dashboard/models/activity-log.interface';
 
-export const reportedDevices: any = createAction(
+export const reportRecords: any = createAction(
   '[Map Component] Report Devices',
-  props<{ records: Devices[] }>()
+  props<{ records: Records[] }>()
 );

@@ -1,20 +1,21 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Dictionary, EntitySelectors } from '@ngrx/entity/src/models';
 import { ActionReducer, createReducer, on } from '@ngrx/store';
-import { Devices } from 'src/app/shared/models/devices.interface';
+import { Records } from 'src/app/modules/dashboard/models/activity-log.interface';
 import { RecordsActions } from '../action-types';
 
 export const FeatureKey: string = 'records'; // eslint-disable-line
 
-export interface DevicesState extends EntityState<Devices> {}
+export interface RecordsState extends EntityState<Records> {}
 
-export const adapter: EntityAdapter<Devices> = createEntityAdapter<Devices>();
+export const adapter: EntityAdapter<Records> = createEntityAdapter<Records>();
 
-export const initialRecordsState: DevicesState = adapter.getInitialState({});
+export const initialRecordsState: RecordsState = adapter.getInitialState({});
 
-export const recordsReducer: ActionReducer<DevicesState> = createReducer(
+export const recordsReducer: ActionReducer<RecordsState> = createReducer(
   initialRecordsState,
-  on(RecordsActions.reportedDevices, (state: DevicesState, action: any) =>
+  on(RecordsActions.reportRecords, (state: RecordsState, action: any) =>
+    // TODO Find the way to add all records into store ignoring the id
     adapter.addMany(action.records, state)
   )
 );
@@ -24,18 +25,18 @@ const {
   selectEntities,
   selectAll,
   selectTotal,
-}: EntitySelectors<Devices, EntityState<Devices>> = adapter.getSelectors();
+}: EntitySelectors<Records, EntityState<Records>> = adapter.getSelectors();
 
 export const selectRecordsIds: (
-  state: EntityState<Devices>
+  state: EntityState<Records>
 ) => string[] | number[] = selectIds;
 
 export const selectRecordsEntities: (
-  state: EntityState<Devices>
-) => Dictionary<Devices> = selectEntities;
+  state: EntityState<Records>
+) => Dictionary<Records> = selectEntities;
 
-export const selectAllRecords: (state: EntityState<Devices>) => Devices[] =
+export const selectAllRecords: (state: EntityState<Records>) => Records[] =
   selectAll;
 
-export const selectRecordsTotal: (state: EntityState<Devices>) => number =
+export const selectRecordsTotal: (state: EntityState<Records>) => number =
   selectTotal;

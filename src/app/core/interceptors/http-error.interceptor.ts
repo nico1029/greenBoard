@@ -13,7 +13,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    console.log('Calling Interceptor'); // eslint-disable-line
     return next.handle(request);
   }
 }
