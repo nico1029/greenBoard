@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, retry } from 'rxjs';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { Devices } from 'src/app/shared/models/devices.interface';
-// import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',

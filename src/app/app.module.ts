@@ -19,8 +19,9 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
-import { metaReducers, reducers } from './core/store/reducers/app.reducers';
+// import { metaReducers } from './core/store/reducers/app.reducers';
 import { AuthEffects } from './core/store/effects/auth.effects';
+import { appReducers } from './core/store/reducers-map';
 
 @NgModule({
   declarations: [AppComponent, ErrorDialogComponent],
@@ -33,8 +34,8 @@ import { AuthEffects } from './core/store/effects/auth.effects';
     AngularFirestoreModule,
     AngularFireStorageModule,
     HttpClientModule,
-    StoreModule.forRoot(reducers, {
-      metaReducers,
+    StoreModule.forRoot(appReducers, {
+      // metaReducers,
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true,

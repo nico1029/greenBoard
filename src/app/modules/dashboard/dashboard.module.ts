@@ -7,19 +7,23 @@ import { MapComponent } from './components/map/map.component';
 import { HeaderComponent } from 'src/app/core/components/header/header.component';
 import { SideBarComponent } from 'src/app/core/components/side-bar/side-bar.component';
 import { StoreModule } from '@ngrx/store';
-import * as from from 'src/app/core/store/reducers/devices.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { DevicesEffects } from 'src/app/core/store/effects/devices.effects';
+import { dashboardReducers } from 'src/app/core/store/reducers-map';
+import { RecordsEffects } from 'src/app/core/store/effects/records.effects';
+import { ActivityLogComponent } from './components/activity-log/activity-log.component';
 
 @NgModule({
-  declarations: [DashboardComponent, MapComponent],
+  declarations: [DashboardComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,
     HeaderComponent,
     SideBarComponent,
-    StoreModule.forFeature(from.FeatureKey, from.updateDevicesReducer),
-    EffectsModule.forFeature([DevicesEffects]),
+    ActivityLogComponent,
+    MapComponent,
+    StoreModule.forFeature('operation', dashboardReducers),
+    EffectsModule.forFeature([DevicesEffects, RecordsEffects]),
   ],
 })
 export class DashboardModule {}

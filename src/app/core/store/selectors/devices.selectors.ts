@@ -4,11 +4,22 @@ import {
   MemoizedSelector,
 } from '@ngrx/store';
 import { DevicesState } from '../reducers/devices.reducers';
+import * as fromDevices from './../reducers/devices.reducers';
 
-export const selectMapState: MemoizedSelector<any, any> =
-  createFeatureSelector<DevicesState>('map');
+export const selectOperationState: MemoizedSelector<any, any> =
+  createFeatureSelector<DevicesState>('operation');
 
-export const selectDevices: MemoizedSelector<any, any> = createSelector(
-  selectMapState,
-  (map: DevicesState) => map.devices
+export const selectDevicesState: MemoizedSelector<any, any> = createSelector(
+  selectOperationState,
+  (state: any) => state.devices // eslint-disable-line
+);
+
+export const selectAllDevices: MemoizedSelector<any, any> = createSelector(
+  selectDevicesState,
+  fromDevices.selectAllDevices
+);
+
+export const selectTotalDevices: MemoizedSelector<any, any> = createSelector(
+  selectDevicesState,
+  fromDevices.selectDevicesTotal
 );
