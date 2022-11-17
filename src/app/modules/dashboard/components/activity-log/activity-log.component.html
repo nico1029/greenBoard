@@ -1,29 +1,28 @@
-<div class="table-responsive">
-    <table class="table table-striped table-hover caption-top  align-middle" *ngIf="records$ | async as records">
-        <caption class="pt-0 fw-bold text-black">Activity Log</caption>
-        <tbody class="fs-4" *ngIf="records.length >= 1; else noRecords">
-            <tr *ngFor="let record of records">
-                <ng-container [ngTemplateOutlet]="recordsRow" [ngTemplateOutletContext]="{ record: record }">
-                </ng-container>
-            </tr>
-        </tbody>
-    </table>
+<ul class="nav nav-pills mt-4 mb-2" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link fw-bold btn-primary active" id="pills-live-activity-tab" data-bs-toggle="pill"
+            data-bs-target="#pills-live-activity" type="button" role="tab" aria-controls="pills-live-activity"
+            aria-selected="true" (click)="changeRecords('Live')">Live Activity</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link fw-bold btn-light" id="pills-activity-log-tab" data-bs-toggle="pill"
+            data-bs-target="#pills-activity-log" type="button" role="tab" aria-controls="pills-activity-log"
+            aria-selected="false" (click)="changeRecords('Log')">Activity Log</button>
+    </li>
+</ul>
+<div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-live-activity" role="tabpanel"
+        aria-labelledby="pills-live-activity-tab" tabindex="0">
+        <form class="d-inline-flex align-items-center" [formGroup]="selectForm">
+            <label class="fw-bold pe-3">Filters</label>
+            <select class="form-select" aria-label="Default select example" formControlName="options">
+                <option *ngFor="let filter of filters" [value]="filter"> {{ filter }} </option>
+            </select>
+        </form>
+    </div>
+    <div class="tab-pane fade" id="pills-activity-log" role="tabpanel" aria-labelledby="pills-activity-log-tab"
+        tabindex="0">
+    </div>
 </div>
-<ng-template #noRecords>
-    <label class="text-gray">No Records</label>
-</ng-template>
-<ng-template #recordsRow let-record="record">
-    <th scope="row"> {{ record.id }} </th>
-    <td>
-        <span *ngIf="record.isRunOutOfBattery === 'Yes' && record.status === 'Active'"> Low battery for {{ record.type
-            }}: battery level at {{
-            record.batteryLevel / 100 | percent }} </span>
-        <span *ngIf="record.status === 'Lost Connection'"> A {{ record.type }} has lost connection </span>
-    </td>
-    <td> {{ record.lastUpdate | date:"medium" }} </td>
-    <td> <button class="btn btn-primary btn-sm rounded-3 text-white"
-            [ngClass]="{'btn-danger': record.status === 'Lost Connection'}" data-bs-toggle="modal"
-            data-bs-target="#vehicleModal" (click)="consultRecord(record)"> {{ record.status === 'Lost Connection' ?
-            'Report' : 'See' }} </button> </td>
-</ng-template>
+<app-records-table [records$]="records$" [size]="'large'" [needConsult]="'Yes'"></app-records-table>
 <app-vehicles-modal></app-vehicles-modal>

@@ -14,13 +14,14 @@ import { RecordsEffects } from 'src/app/core/store/effects/records.effects';
 import { ActivityLogComponent } from './components/activity-log/activity-log.component';
 
 @NgModule({
-  declarations: [DashboardComponent, MapComponent],
+  declarations: [DashboardComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,
     HeaderComponent,
     SideBarComponent,
     ActivityLogComponent,
+    MapComponent,
     StoreModule.forFeature('operation', dashboardReducers),
     EffectsModule.forFeature([DevicesEffects, RecordsEffects]),
   ],

@@ -11,7 +11,7 @@ export class RecordsService {
   public consultedRecord$: BehaviorSubject<Records> = new BehaviorSubject(
     {} as Records
   );
-
+  
   constructor(private readonly http: HttpClient) {
     // TODO
   }

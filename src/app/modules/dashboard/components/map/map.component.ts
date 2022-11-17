@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -24,16 +25,19 @@ import { environment } from 'src/environments/environment';
 import { MapImagesSrc } from '../../models/map.enum';
 import { MarkerFeatures } from '../../models/map.interface';
 import { MapService } from '../../services/map.service';
+import { MapIndicatorsComponent } from '../map-indicators/map-indicators.component';
 
 @Component({
   selector: 'app-map',
+  standalone: true,
+  imports: [CommonModule, MapIndicatorsComponent],
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapComponent implements OnInit, OnChanges, OnDestroy {
   public map!: Mapboxgl.Map;
-  public notifier: Subject<null> = new Subject();
+  public notifier$: Subject<null> = new Subject();
 
   constructor(
     private readonly mapService: MapService,
@@ -51,8 +55,8 @@ export class MapComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.notifier.next(null);
-    this.notifier.complete();
+    this.notifier$.next(null);
+    this.notifier$.complete();
     console.log('Destroying Map Component'); // eslint-disable-line
   }
 
@@ -145,10 +149,10 @@ export class MapComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private updateSource(): void {
-    interval(5000)
+    interval(10000)
       .pipe(
         retry(3),
-        takeUntil(this.notifier),
+        takeUntil(this.notifier$),
         mergeMap(() => this.mapService.getLocation(this.mapService.numDevices)),
         tap((devices: Devices[]) => {
           const source: Mapboxgl.GeoJSONSource = this.map.getSource(

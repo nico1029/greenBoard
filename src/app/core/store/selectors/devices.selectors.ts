@@ -14,18 +14,9 @@ export const selectDevicesState: MemoizedSelector<any, any> = createSelector(
   (state: any) => state.devices // eslint-disable-line
 );
 
-// Old devices selector without entity
-// export const selectDevices: MemoizedSelector<any, any> = createSelector(
-//   selectMapState,
-//   (map: DevicesState) => map.devices
 export const selectAllDevices: MemoizedSelector<any, any> = createSelector(
   selectDevicesState,
   fromDevices.selectAllDevices
-);
-
-export const selectDevicesEntities: MemoizedSelector<any, any> = createSelector(
-  selectDevicesState,
-  fromDevices.selectDevicesEntities
 );
 
 export const selectTotalDevices: MemoizedSelector<any, any> = createSelector(

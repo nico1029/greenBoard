@@ -1,2 +1,9 @@
 <span class="fw-bold">Traffic Analytics</span>
-<div class="rounded-3 mt-2" id="map"></div>
+<div class="position-relative">
+    <div class="rounded-3 mt-2" id="map" style="z-index: 0;"></div>
+    <div class="position-absolute bottom-0 start-0">
+        <div class="position-relative container-fluid p-3 rounded-top indicators-banner">
+            <app-map-indicators></app-map-indicators>
+        </div>
+    </div>
+</div>

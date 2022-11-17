@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+} from '@angular/fire/compat/firestore';
 import { Store } from '@ngrx/store';
 import { login } from '../store/actions/auth.actions';
 import { ErrorDialogService } from './error-dialog.service';
@@ -9,11 +13,13 @@ import { ErrorDialogService } from './error-dialog.service';
 })
 export class AuthService {
   public userData: any;
+  public userCollection!: AngularFirestoreCollection<any>;
 
   constructor(
     private readonly afAuth: AngularFireAuth, // Inject Firebase auth service
     private readonly errorDialogService: ErrorDialogService,
-    private readonly store: Store
+    private readonly store: Store,
+    private readonly db: AngularFirestore
   ) {
     // Saving user data in localstorage when logged in and setting up null when logged out
     this.afAuth.authState.subscribe((user: any) => {
@@ -43,5 +49,9 @@ export class AuthService {
       .catch(() => {
         this.errorDialogService.openDialog('user-not-found');
       });
+  }
+
+  public getAllUsers(): void {
+    this.userCollection = this.db.collection<any>('users');
   }
 }

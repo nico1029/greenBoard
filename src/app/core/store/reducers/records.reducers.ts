@@ -16,7 +16,7 @@ export const recordsReducer: ActionReducer<RecordsState> = createReducer(
   initialRecordsState,
   on(RecordsActions.reportRecords, (state: RecordsState, action: any) =>
     // TODO Find the way to add all records into store ignoring the id
-    adapter.addMany(action.records, state)
+    adapter.setAll(action.records, state)
   )
 );
 

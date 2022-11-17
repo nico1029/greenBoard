@@ -13,6 +13,8 @@ import { selectAllRecords } from '../selectors/records.selectors';
 
 @Injectable()
 export class RecordsEffects {
+  private firstQuery: boolean = true; // eslint-disable-line
+
   constructor(
     private readonly actions$: Actions,
     private readonly store: Store
@@ -25,9 +27,19 @@ export class RecordsEffects {
       return this.actions$.pipe(
         ofType(RecordsActions.reportRecords),
         concatMap((action: any) => this.store.select(selectAllRecords)), // eslint-disable-line
-        tap((records: Records[]) =>
-          localStorage.setItem('records', JSON.stringify(records))
-        )
+        tap((records: Records[]) => {
+          if (this.firstQuery) {
+            localStorage.setItem('records', JSON.stringify(records));
+            this.firstQuery = false;
+          } else {
+            const previousRecords: Records[] = JSON.parse(
+              localStorage.getItem('records')!
+            );
+            const newRecords: Records[] = records.concat(previousRecords);
+            // Historical activity should be save in MongoDB
+            localStorage.setItem('records', JSON.stringify(newRecords));
+          }
+        })
       );
     },
     { dispatch: false }

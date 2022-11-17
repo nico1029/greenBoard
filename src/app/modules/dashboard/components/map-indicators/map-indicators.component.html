@@ -1,0 +1,28 @@
+<div class="container-fluid opacity-100 pb-3">
+    <table class="table table-borderless m-0">
+        <thead class="text-white">
+            <tr>
+                <th scope="col" style="padding-right: 80px;">INDICATORS</th>
+                <th scope="col">TOTAL</th>
+                <th scope="col">PCT%</th>
+            </tr>
+        </thead>
+        <tbody class="text-muted" *ngIf="totalDevices$ | async as totalDevices">
+            <tr>
+                <td>Vehicles Surveyed</td>
+                <td> {{ totalDevices }} </td>
+                <td>N/A</td>
+            </tr>
+            <tr *ngIf="totalRecordsDisconnected$ | async as totalRecordsDisconnected">
+                <td>Offline</td>
+                <td>{{ totalRecordsDisconnected }}</td>
+                <td> {{ totalRecordsDisconnected / totalDevices | percent }} </td>
+            </tr>
+            <tr *ngIf="totalRecordsROB$ | async as totalRecordsROB">
+                <td>Low of Battery</td>
+                <td> {{ totalRecordsROB }} </td>
+                <td> {{ totalRecordsROB / totalDevices | percent }} </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
