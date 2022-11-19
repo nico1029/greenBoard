@@ -8,6 +8,7 @@ export interface BasicDevice {
   status?: string;
   isRunOutOfBattery?: string;
   lastLatLong: [number, number];
+  operation: string;
 }
 
 export interface Devices extends BasicDevice {

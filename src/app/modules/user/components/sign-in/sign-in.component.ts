@@ -39,7 +39,6 @@ export class SignInComponent implements OnChanges {
     const email: string = this.loginForm.value.email;
     const password: string = this.loginForm.value.password;
     this.authService.SignIn(email, password);
-    this.authService.getAllUsers();
     this.loginForm.reset();
   }
 
