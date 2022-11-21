@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
-    "start:railway": "node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng serve",
+    "start:railway": "node --max_old_space_size=8048 ./node_modules/@angular/cli/bin/ng serve",
     "start:proxy": "ng serve -o --proxy-config ./proxy.config.json",
     "build": "ng build",
     "build:railway": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --aot",
