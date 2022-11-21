@@ -1,16 +1,42 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
+export interface UserAuth {
+  apiKey: string;
+  appName: string;
+  createdAt: string;
+  email: string;
+  emailVerified: boolean;
+  isAnonymous: boolean;
+  lastLoginAt: string;
+  providerData: ProviderData;
+  stsTokenManager: Token;
+  uid: string;
+}
+
+export interface Token {
+  accessToken: string;
+  expirationTime: number;
+  refreshToken: string;
+}
+
+export interface ProviderData {
+  displayName: any;
+  phoneNumber: any;
+  photoUrl: string;
+  providerId: string;
+  uid: string;
+}
 
 export interface LoginForm {
   email: any;
   password?: any;
 }
 
-export interface User {
+export interface UserStorage {
   email: string;
   lastLogin?: string;
   lastName: string;
-  lastUpdate: string;
-  createdAt: string;
+  lastUpdate?: string;
+  createdAt?: string;
   name: string;
   phone: string;
   picture: string;

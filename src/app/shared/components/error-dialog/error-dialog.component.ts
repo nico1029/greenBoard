@@ -4,7 +4,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { ErrorContent } from '../../models/error-content';
+import { ErrorContent } from '../../models/error.interface';
 
 @Component({
   selector: 'app-error-dialog',
@@ -14,22 +14,40 @@ import { ErrorContent } from '../../models/error-content';
 })
 export class ErrorDialogComponent implements OnInit {
   @Input()
-  public error?: string;
-
-  public errorContent: ErrorContent = {
-    icon: '',
-    message: '',
-  };
+  public error?: ErrorContent;
 
   public ngOnInit(): void {
-    switch (this.error) {
-      case 'user-not-found':
-        this.errorContent = {
-          icon: 'fa-user-large-slash',
-          message:
-            'Lo sentimos, no encontramos un registro asociado con estos datos. El usuario puede no estar registrado.' +
-            'Por favor, contacte al administrador.',
-        };
+    this.createError();
+  }
+
+  private createError(): void {
+    const message: string | undefined = this.error?.message
+      .split('.')[0]
+      .replace('Firebase: ', '');
+    if (this.error?.topic) {
+      const attributes: string[] = this.generateModalAttributes();
+      this.error = {
+        ...this.error,
+        message: message!,
+        icon: attributes[0],
+      };
+      this.error?.modal?.classList.add('error-dialog-modal', attributes[1]);
     }
+  }
+
+  private generateModalAttributes(): string[] {
+    let icon: string;
+    let backgroundClass: string;
+    switch (this.error?.topic) {
+      case 'user-not-found':
+        icon = 'fa-user-large-slash';
+        backgroundClass = 'bg-secondary';
+        return [icon, backgroundClass];
+      case 'user-not-created':
+        icon = 'fa-user-xmark';
+        backgroundClass = 'bg-warning';
+        return [icon, backgroundClass];
+    }
+    return [];
   }
 }

@@ -132,7 +132,7 @@ export class MapComponent implements OnInit, OnChanges, OnDestroy {
       const feature: MarkerFeatures = {
         type: device.type,
         properties: {
-          description: `The device id is ${device.id}`,
+          description: `Device id: ${device.id}`,
           icon: device.type,
         },
         geometry: {

@@ -1,6 +1,21 @@
 <div class="container-fluid">
-    <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#createUserModal">
-        Add User
-    </button>
+    <div class="d-flex flex-row align-items-center">
+        <div class="p-3 shadow rounded-3 bg-white">
+            <em class="fa-solid fa-users fa-2x"></em>
+        </div>
+        <label class="fw-bold fs-rfs-20 ms-4">Users Information</label>
+        <button type="button" class="btn btn-primary text-white ms-auto" data-bs-toggle="modal"
+            data-bs-target="#createUserModal">
+            <em class="fa-solid fa-plus me-2"></em> Add User
+        </button>
+    </div>
+    <div class="row m-0 justify-content-center" style="margin-top: 100px !important;">
+        <div class="col-8 shadow border border-1 bg-white rounded-2 pt-4 px-0">
+            <div class="row m-0 border-bottom">
+                <label class="pb-2 fs-rfs-18 text-muted px-4">Agents Status</label>
+            </div>
+            <app-users-table></app-users-table>
+        </div>
+    </div>
 </div>
 <app-create-user></app-create-user>

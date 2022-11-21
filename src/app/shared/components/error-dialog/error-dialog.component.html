@@ -1,6 +1,6 @@
 <div class="modal-body text-white text-center fs-16 lg-sm pb-5 px-4">
     <div class="d-flex justify-content-center align-items-center" style="height: 150px;">
-        <i class="fa-solid fa-user-large-slash fa-3x"></i>
+        <em class="fa-solid fa-3x" [class]="error?.icon"></em>
     </div>
-    {{ errorContent.message }}
+    {{ error?.message }}
 </div>

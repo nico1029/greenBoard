@@ -13,8 +13,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
-import { Roles } from '../../models/user.enum';
-import { User, UserForm } from '../../models/user.interface';
+import { Roles } from 'src/app/core/models/user.enum';
+import { UserForm, UserStorage } from 'src/app/core/models/user.interface';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-create-user',
@@ -53,7 +54,10 @@ export class CreateUserComponent implements OnInit, OnDestroy {
     role: [this.roles[1], Validators.required],
   });
 
-  constructor(private readonly nonFb: NonNullableFormBuilder) {
+  constructor(
+    private readonly nonFb: NonNullableFormBuilder,
+    private readonly authService: AuthService
+  ) {
     // TODO
   }
 
@@ -81,19 +85,17 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   }
 
   public createUser(): void {
-    const currentDate: string = new Date().toJSON();
     const [name, lastName]: string[] = this.fullName?.value.split('');
-    const user: User = {
+    const user: UserStorage = {
       email: this.email?.value,
       lastName: lastName,
-      lastUpdate: currentDate,
-      createdAt: currentDate,
       name: name,
-      phone: this.phoneIndicator?.value + this.phone?.value,
+      phone: `${this.phoneIndicator?.value} ${this.phone?.value}`,
       picture: '',
       role: this.role?.value,
     };
-    console.log('User created', user); // eslint-disable-line
+    this.authService.createAuthUser(user, this.password?.value);
+    this.userForm.reset();
   }
 
   public get email(): AbstractControl | null {

@@ -17,3 +17,21 @@
 
 /* Mapbox styles */
 @import "mapbox-gl/dist/mapbox-gl.css";
+
+/* RFS Font Sizes */
+
+.fs-rfs-14 {
+    @include font-size(0.875rem);
+}
+
+.fs-rfs-16 {
+    @include font-size(1rem);
+}
+
+.fs-rfs-18 {
+    @include font-size(1.125rem);
+}
+
+.fs-rfs-20 {
+    @include font-size(1.25rem);
+}

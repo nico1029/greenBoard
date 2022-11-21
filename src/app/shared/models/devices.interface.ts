@@ -1,6 +1,15 @@
-export interface BasicDevice {
+export interface Vehicle {
   id: number;
   type: string;
+}
+
+export interface VehicleStorage extends Vehicle {
+  brand: string;
+  createdAt: string;
+  model: string;
+  modifiedAt: string;
+}
+export interface BasicDevice extends Vehicle {
   latLong: [number, number];
   date: string;
   lastUpdate: string;
@@ -12,9 +21,5 @@ export interface BasicDevice {
 }
 
 export interface Devices extends BasicDevice {
-  batteryLevel: number;
-}
-
-export interface ElectricBike extends BasicDevice {
   batteryLevel: number;
 }
