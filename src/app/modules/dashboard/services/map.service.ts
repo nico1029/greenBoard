@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, retry } from 'rxjs';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { Devices } from 'src/app/shared/models/devices.interface';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +16,8 @@ export class MapService {
     // TODO
   }
   // Proxy url
-  public baseUrlForImages: string = '/greenboard-8530d.appspot.com/o/'; // eslint-disable-line
-  private baseUrlForDevices: string = '/get-devices'; //eslint-disable-line
+  public baseUrlForImages: string = environment.firebaseStorage; // eslint-disable-line
+  private baseUrlForDevices: string = environment.devicesEndpoint; //eslint-disable-line
   public numDevices: number = 10; // eslint-disable-line
 
   public getLocation(numDevices: number): Observable<Devices[]> {

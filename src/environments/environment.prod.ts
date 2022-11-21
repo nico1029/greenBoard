@@ -14,4 +14,6 @@ export const environment: any = {
   gcpConfig: {
     apiKey: 'AIzaSyCJaAkHXMddN1ZlqgTOF0LKYfldg4eurmQ',
   },
+  firebaseStorage: 'https://firebasestorage.googleapis.com/v0/b/greenboard-8530d.appspot.com/o/',
+  devicesEndpoint: 'https://greenboard-8530d.uk.r.appspot.com/api/v1/get-devices',
 };

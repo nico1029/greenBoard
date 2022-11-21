@@ -4,10 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
-    "start:railway": "node --max_old_space_size=8048 ./node_modules/@angular/cli/bin/ng serve",
     "start:proxy": "ng serve -o --proxy-config ./proxy.config.json",
+    "start:prod": "ng serve -o --configuration production",
     "build": "ng build",
-    "build:railway": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --aot",
+    "build:prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"
