@@ -10,14 +10,17 @@ export class ErrorDialogService {
   constructor(private readonly modalService: NgbModal) {
     // TODO
   }
-  public openDialog(error: string): void {
+  public openDialog(message: string, topic: string): void {
     this.modalRef = this.modalService.open(ErrorDialogComponent, {
       centered: true,
     });
-    this.modalRef.componentInstance.error = error;
     const modal: Element | undefined = document
       .querySelector('ngb-modal-window')
       ?.getElementsByClassName('modal-content')[0];
-    modal?.classList.add('error-dialog-modal');
+    this.modalRef.componentInstance.error = {
+      message: message,
+      topic: topic,
+      modal: modal,
+    };
   }
 }

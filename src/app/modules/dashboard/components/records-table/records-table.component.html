@@ -1,5 +1,5 @@
 <div class="table-responsive mt-4" style="max-height: 400px">
-    <table class="table table-striped table-hover caption-top  align-middle" *ngIf="records$ | async as records">
+    <table class="table table-striped table-hover caption-top table-borderless align-middle" *ngIf="records$ | async as records">
         <tbody class="fs-4" *ngIf="records.length >= 1; else noRecords">
             <tr *ngFor="let record of records">
                 <ng-container [ngTemplateOutlet]="recordsRow" [ngTemplateOutletContext]="{ record: record }">

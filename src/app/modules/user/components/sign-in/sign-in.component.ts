@@ -8,8 +8,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { LoginForm } from '../../models/user.interface';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { LoginForm } from 'src/app/core/models/user.interface';
 
 @Component({
   selector: 'app-sign-in',
@@ -38,8 +38,7 @@ export class SignInComponent implements OnChanges {
   public onSubmit(): void {
     const email: string = this.loginForm.value.email;
     const password: string = this.loginForm.value.password;
-    this.authService.SignIn(email, password);
-    this.authService.getAllUsers();
+    this.authService.signIn(email, password);
     this.loginForm.reset();
   }
 

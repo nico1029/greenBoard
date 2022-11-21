@@ -3,6 +3,9 @@
         <button class="btn btn-light rounded-circle" role="button">
             <em class="fa-solid fa-user text-white"></em>
         </button>
-        <span class="ms-2" *ngIf="user$ | async; let user"> {{ user.email }} </span>
+        <div class="d-flex flex-column ms-2 fs-rfs-14" *ngIf="user$ | async; let user">
+            <span> {{ user.email }} </span>
+            <span> {{ user.role }} </span>
+        </div>
     </div>
 </nav>

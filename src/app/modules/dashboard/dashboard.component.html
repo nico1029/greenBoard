@@ -5,29 +5,34 @@
         </div>
         <div class="col px-0">
             <app-header></app-header>
-            <div class="tab-content p-4" id="v-pills-tabContent">
+            <div class="tab-content p-5" id="v-pills-tabContent">
                 <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
                     aria-labelledby="v-pills-home-tab" tabindex="0">
                     <div class="container-fluid">
-                        <div class="row m-0">
+                        <div class="d-flex flex-row align-items-center">
+                            <div class="p-3 shadow rounded-3 bg-white w-auto">
+                                <em class="fa-solid fa-rocket fa-2x"></em>
+                            </div>
+                            <label class="fw-bold fs-rfs-20 ms-4">Operation Dashboard</label>
+                        </div>
+                        <div class="row m-0" style="margin-top: 80px !important;">
                             <div class="col">
                             </div>
                             <div class="col d-flex flex-column">
                                 <app-map></app-map>
-                                <app-activity-log></app-activity-log>
+                                <div class="shadow border border-1 bg-white rounded-2 p-4 mt-4 pt-0">
+                                    <app-activity-log></app-activity-log>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"
+                <div class="tab-pane fade" id="v-pills-users" role="tabpanel" aria-labelledby="v-pills-users-tab"
                     tabindex="0">
+                    <app-user></app-user>
                 </div>
-                <div class="tab-pane fade" id="v-pills-disabled" role="tabpanel" aria-labelledby="v-pills-disabled-tab"
-                    tabindex="0">...</div>
-                <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab"
-                    tabindex="0">...</div>
                 <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab"
-                    tabindex="0">...</div>
+                    tabindex="0">Settings</div>
             </div>
         </div>
     </div>

@@ -1,0 +1,121 @@
+<div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered justify-content-center">
+        <div class="modal-content p-3 rounded-5">
+            <div class="modal-header border-0 justify-content-center">
+                <h3 class="modal-title fw-bold" id="createUserModalLabel">Create User</h3>
+            </div>
+            <div class="modal-body pb-0">
+                <form class="container-fluid px-3" [formGroup]="userForm" action="" (ngSubmit)="createUser()">
+                    <div class="row m-0">
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1"><em
+                                        class="fa-solid fa-user"></em></span>
+                                <input type="text" class="form-control py-2 shadow-none" placeholder="Full Name"
+                                    aria-label="Full Name" formControlName="fullName" aria-describedby="basic-addon1">
+                            </div>
+                            <div *ngIf="fullName?.invalid && (fullName?.dirty || fullName?.touched)"
+                                class="text-danger fs-14 mt-1">
+                                <div *ngIf="fullName?.errors?.['required']">
+                                    Full Name is required.
+                                </div>
+                                <div *ngIf="fullName?.errors?.['pattern']">
+                                    Full Name has contain name and last name.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1"><em
+                                        class="fa-solid fa-envelope"></em></span>
+                                <input type="text" class="form-control py-2 shadow-none" placeholder="Email"
+                                    aria-label="Email" formControlName="email" aria-describedby="basic-addon1">
+                            </div>
+                            <div *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+                                class="text-danger fs-14 mt-1">
+                                <div *ngIf="email?.errors?.['required']">
+                                    Email is required.
+                                </div>
+                                <div *ngIf="email?.errors?.['email']">
+                                    Email must be valid (e.g. email@dominio.com).
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1"><em
+                                        class="fa-solid fa-lock"></em></span>
+                                <input type="text" class="form-control py-2 shadow-none" placeholder="Password"
+                                    #passwordInput aria-label="Password" formControlName="password"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                            <div class="d-inline-flex align-items-center w-100 mt-1">
+                                <div *ngIf="password?.invalid && (password?.dirty || password?.touched)"
+                                    class="text-danger fs-14 mt-1 flex-grow-1">
+                                    <div *ngIf="password?.errors?.['required']">
+                                        Password is required.
+                                    </div>
+                                    <div *ngIf="password?.errors?.['minlength']">
+                                        Password must contain minimum 8 digits.
+                                    </div>
+                                    <div *ngIf="password?.errors?.['pattern']">
+                                        Password must be valid.
+                                    </div>
+                                </div>
+                                <div class="form-check ms-auto mb-0">
+                                    <label class="form-check-label fs-14" for="flexCheckDefault">
+                                        Autogenerate
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                                        formControlName="autoGenerate">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1"><em
+                                        class="fa-solid fa-phone"></em></span>
+                                <input type="text" class="form-control py-2 shadow-none text-center p-0"
+                                    aria-label="phoneIndicator" formControlName="phoneIndicator"
+                                    aria-describedby="basic-addon1">
+                                <input type="text" class="form-control py-2 shadow-none w-auto" maxlength="10"
+                                    placeholder="Phone Number" formControlName="phone" aria-label="Phone Number"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                            <div *ngIf="phoneIndicator?.invalid && (phoneIndicator?.dirty || phoneIndicator?.touched)"
+                                class="text-danger fs-14 mt-1">
+                                <div *ngIf="phoneIndicator?.errors?.['required']">
+                                    Phone Indicator is required.
+                                </div>
+                            </div>
+                            <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)"
+                                class="text-danger fs-14 mt-1">
+                                <div *ngIf="phone?.errors?.['required']">
+                                    Phone is required.
+                                </div>
+                                <div *ngIf="phone?.errors?.['pattern']">
+                                    Phone should only contain numbers.
+                                </div>
+                                <div *ngIf="phone?.errors?.['minlength']">
+                                    Phone must contain 10 digits.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-4">
+                            <span class="input-group-text" id="basic-addon1"><em
+                                    class="fa-solid fa-circle-user"></em></span>
+                            <select class="form-select py-2 text-muted shadow-none" aria-label="Default select example"
+                                formControlName="role">
+                                <option *ngFor="let rol of roles" [value]="rol"> {{ rol }} </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center" style="padding: 0px 12px 24px 12px">
+                        <button type="submit" class="btn btn-secondary w-100 py-2" data-bs-dismiss="modal"
+                            [disabled]="!userForm.valid">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

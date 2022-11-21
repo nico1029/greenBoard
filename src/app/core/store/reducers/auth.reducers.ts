@@ -1,15 +1,15 @@
 import { ActionReducer, createReducer, on } from '@ngrx/store';
-import { User } from '../../models/user';
+import { UserAuth } from '../../models/user.interface';
 import { AuthActions } from '../action-types';
 
 export const FeatureKey: string = 'auth'; // eslint-disable-line
 
 export interface AuthState {
-  user: User;
+  user: UserAuth;
 }
 
 export const initialAuthState: AuthState = {
-  user: {} as User,
+  user: {} as UserAuth,
 };
 
 export const authReducer: ActionReducer<AuthState> = createReducer(
@@ -22,7 +22,7 @@ export const authReducer: ActionReducer<AuthState> = createReducer(
 
   on(AuthActions.logout, (): AuthState => {
     return {
-      user: {} as User, // eslint-disable-line
+      user: {} as UserAuth, // eslint-disable-line
     };
   })
 );
