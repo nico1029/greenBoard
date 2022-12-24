@@ -39,12 +39,12 @@ export class ErrorDialogComponent implements OnInit {
     let icon: string;
     let backgroundClass: string;
     switch (this.error?.topic) {
-      case 'user-not-found':
-        icon = 'fa-user-large-slash';
+      case 'business-error':
+        icon = 'fa-circle-exclamation';
         backgroundClass = 'bg-secondary';
         return [icon, backgroundClass];
-      case 'user-not-created':
-        icon = 'fa-user-xmark';
+      case 'service-error':
+        icon = 'fa-xmark';
         backgroundClass = 'bg-warning';
         return [icon, backgroundClass];
     }

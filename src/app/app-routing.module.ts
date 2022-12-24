@@ -27,6 +27,15 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'payments',
+    loadComponent: () =>
+      import('./dummy-components/components/payments/payments.component').then(
+        (
+          m: typeof import('./dummy-components/components/payments/payments.component')
+        ) => m.PaymentsComponent
+      ),
+  },
+  {
     path: '**',
     loadComponent: () =>
       import('./core/components/page-not-found/page-not-found.component').then(

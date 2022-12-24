@@ -4,11 +4,12 @@ export interface Vehicle {
 }
 
 export interface VehicleStorage extends Vehicle {
+  boardReference: string;
   brand: string;
-  createdAt: string;
-  model: string;
-  modifiedAt: string;
+  createdAt: Date;
+  serialNumber: string;
 }
+
 export interface BasicDevice extends Vehicle {
   latLong: [number, number];
   date: string;

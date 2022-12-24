@@ -3,3 +3,14 @@
     border-radius: 20px !important;
     box-shadow: 0 1rem 3rem rgba($black, 0.175) !important;
 }
+
+// No arrows in input number
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}

@@ -32,6 +32,7 @@ export interface LoginForm {
 }
 
 export interface UserStorage {
+  id?: string;
   email: string;
   lastLogin?: string;
   lastName: string;

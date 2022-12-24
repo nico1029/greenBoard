@@ -36,7 +36,7 @@ export class AuthService {
         });
       })
       .catch((res: FirebaseError) =>
-        this.errorDialogService.openDialog(res.message, 'user-not-found')
+        this.errorDialogService.openDialog(res.message, 'business-error')
       );
   }
 
@@ -58,7 +58,7 @@ export class AuthService {
         this.userService.addUser(res.user.uid, newUser);
       })
       .catch((res: FirebaseError) =>
-        this.errorDialogService.openDialog(res.message, 'user-not-created')
+        this.errorDialogService.openDialog(res.message, 'service-error')
       );
   }
 
