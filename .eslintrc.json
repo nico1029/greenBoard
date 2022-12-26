@@ -109,7 +109,7 @@
         "no-else-return": [
           "error",
           {
-            "allowElseIf": false
+            "allowElseIf": true
           }
         ],
         "consistent-return": [

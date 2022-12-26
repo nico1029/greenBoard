@@ -25,8 +25,8 @@ export interface PaymentForm {
 
 export interface ServicesStorage {
   id?: string;
-  endedAt: Date | string;
-  initiatedAt: Date;
+  endedAt?: string;
+  initiatedAt: string;
   payment: string;
   status: ServicesStorageStatus;
   totalTime: string;

@@ -31,11 +31,11 @@ import { VehicleStorage } from 'src/app/shared/models/devices.interface';
 })
 export class PaymentsComponent {
   public paymentMethods: string[] = Object.values(PaymentMethods);
-  public paymentId: string = ''; // eslint-disable-line
+  public service: ServicesStorage = {} as ServicesStorage;
   public userId: string = ''; // eslint-disable-line
   public vehicleBoardReference: string = ''; // eslint-disable-line
   public users$: Observable<UserStorage[]>;
-  public payments$: Observable<PaymentsStorage[]>;
+  public services$: Observable<ServicesStorage[]>;
   public vehicles$: Observable<VehicleStorage[]>;
 
   public paymentForm: FormGroup = this.nonFb.group<PaymentForm>({
@@ -53,7 +53,7 @@ export class PaymentsComponent {
     private readonly vehiclesService: DevicesService
   ) {
     this.users$ = this.userService.getAllUsers();
-    this.payments$ = this.paymentsService.getAllPayments();
+    this.services$ = this.servicesActive;
     this.vehicles$ = this.vehiclesService.getAllVehicles();
   }
 
@@ -94,8 +94,7 @@ export class PaymentsComponent {
 
   public buildService(paymentId: string): ServicesStorage {
     const service: ServicesStorage = {
-      endedAt: '',
-      initiatedAt: new Date(),
+      initiatedAt: new Date().toString(),
       payment: paymentId,
       status: ServicesStorageStatus.Active,
       totalTime: '',
@@ -106,6 +105,23 @@ export class PaymentsComponent {
   }
 
   public finishService(): void {
-    const endedDate: Date = new Date(); // eslint-disable-line
+    const service: ServicesStorage = {
+      ...this.service,
+      endedAt: new Date().toString(),
+      status: ServicesStorageStatus.Finished,
+      totalTime: this.constructTotalTime(),
+    };
+    this.paymentsService.updateService(this.service.id!, service);
+  }
+
+  private constructTotalTime(): string {
+    const totalTimeMinutes: number = Math.floor(
+      (new Date().getTime() - new Date(this.service.initiatedAt).getTime()) /
+        60000
+    );
+    if (totalTimeMinutes >= 60) {
+      return `${Math.floor(totalTimeMinutes / 60).toString()} hours`;
+    }
+    return `${totalTimeMinutes} minutes`;
   }
 }

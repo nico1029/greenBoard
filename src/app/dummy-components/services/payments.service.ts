@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
+  QuerySnapshot,
 } from '@angular/fire/compat/firestore';
 import { PaymentsStorage, ServicesStorage } from '../models/payments.interface';
 import { ErrorDialogService } from 'src/app/core/services/error-dialog.service';
@@ -52,7 +53,18 @@ export class PaymentsService {
     }
   }
 
-  public updateService(): void {
-    // TODO
+  public updateService(uid: string, service: ServicesStorage): void {
+    this.servicesCollection.doc(uid).update(service);
+  }
+
+  public async getServiceByUser(email: string): Promise<string> {
+    let userId: string = ''; // eslint-disable-line
+    await this.servicesCollection.ref
+      .where('user', '==', email)
+      .get()
+      .then((x: QuerySnapshot<ServicesStorage>) => {
+        userId = x.docs[0].id;
+      });
+    return userId;
   }
 }
