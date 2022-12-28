@@ -13,6 +13,7 @@ import { dashboardReducers } from 'src/app/core/store/reducers-map';
 import { RecordsEffects } from 'src/app/core/store/effects/records.effects';
 import { ActivityLogComponent } from './components/activity-log/activity-log.component';
 import { UserModule } from '../user/user.module';
+import { ServicesRegisterComponent } from './components/services-register/services-register.component';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -22,6 +23,7 @@ import { UserModule } from '../user/user.module';
     HeaderComponent,
     SideBarComponent,
     ActivityLogComponent,
+    ServicesRegisterComponent,
     MapComponent,
     UserModule,
     StoreModule.forFeature('operation', dashboardReducers),

@@ -16,12 +16,17 @@
                             <label class="fw-bold fs-rfs-20 ms-4">Operation Dashboard</label>
                         </div>
                         <div class="row m-0" style="margin-top: 80px !important;">
-                            <div class="col">
-                            </div>
-                            <div class="col d-flex flex-column">
-                                <app-map></app-map>
-                                <div class="shadow border border-1 bg-white rounded-2 p-4 mt-4 pt-0">
-                                    <app-activity-log></app-activity-log>
+                            <app-map></app-map>
+                            <div class="row m-0 px-0" style="height: 400px !important;">
+                                <div class="col-6">
+                                    <div class="shadow border border-1 bg-white rounded-2 p-4 mt-4 pt-0 h-100">
+                                        <app-services-register></app-services-register>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="shadow border border-1 bg-white rounded-2 p-4 mt-4 pt-0 h-100">
+                                        <app-activity-log></app-activity-log>
+                                    </div>
                                 </div>
                             </div>
                         </div>
